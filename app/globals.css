@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+/* Emberly design tokens */
+@theme inline {
+  --color-night: #100e26;
+  --color-night-2: #1a1740;
+  --color-violet: #6d48ff;
+  --color-violet-soft: #8c6bff;
+  --color-ember: #ff8a3d;
+  --color-amber: #ffb238;
+  --color-mint: #2bd9a8;
+  --color-paper: #f4f2ff;
+
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-display), system-ui, sans-serif;
+
+  --animate-glow: glow 3.2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 8px 28px -8px rgb(109 72 255 / 0.55); }
+  50% { box-shadow: 0 8px 40px -4px rgb(255 138 61 / 0.6); }
+}
+
+body {
+  background: var(--color-night);
+  color: var(--color-paper);
+}
+
+/* Page backdrop: two soft glows on deep indigo */
+.ember-bg {
+  background:
+    radial-gradient(60rem 30rem at 85% -5%, rgb(109 72 255 / 0.28), transparent 60%),
+    radial-gradient(45rem 26rem at 0% 30%, rgb(255 138 61 / 0.1), transparent 60%),
+    var(--color-night);
+}
+
+@layer components {
+  .glass {
+    background: rgb(255 255 255 / 0.05);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60;
+    background: linear-gradient(135deg, var(--color-violet-soft), var(--color-violet) 55%, #4b2bd6);
+    animation: var(--animate-glow);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-paper transition duration-200 hover:bg-white/10;
+    border: 1px solid rgb(255 255 255 / 0.18);
+  }
+
+  .field {
+    @apply w-full rounded-xl bg-white/5 px-4 py-3 text-sm text-paper placeholder:text-paper/40 outline-none transition;
+    border: 1px solid rgb(255 255 255 / 0.12);
+  }
+  .field:focus {
+    border-color: var(--color-violet-soft);
+    box-shadow: 0 0 0 3px rgb(140 107 255 / 0.25);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn-primary { animation: none; }
+}
